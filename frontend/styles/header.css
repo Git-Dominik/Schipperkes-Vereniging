@@ -1,0 +1,47 @@
+header {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://www.larkmead.co.uk/wp-content/uploads/2022/10/Dog-banner-HP-resized.png");
+    background-attachment: fixed;
+    background-position: 50% -300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.header-items-container {
+    width: 100%;
+    max-width: 1800px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+
+.header-text-wrapper {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+@media screen and (max-width: 992px) {
+    header {
+      padding-left: 0;
+    }
+    .header-items-container {
+      padding-left: 0;
+      justify-content: flex-start;
+    }
+    .header-text-wrapper {
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      text-align: left;
+      width: 100%;
+    }
+  }
