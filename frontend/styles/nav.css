@@ -25,13 +25,9 @@
 }
 
 .navbar-logo img {
-    height: 50px;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    height: 100px;
 }
 
-.navbar-logo img:hover {
-    transform: scale(1.05);
-}
 
 .navbar-links {
     display: flex;
