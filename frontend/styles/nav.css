@@ -1,5 +1,5 @@
 .navbar {
-    background-color: var(--bg-color);
+    background-color: rgb(0, 3, 27);
     box-shadow: var(--shadow);
     padding: 0.5rem 1rem;
     position: sticky;
@@ -41,7 +41,7 @@
 }
 
 .nav-link {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
     font-weight: 500;
     padding: 1rem 0.5rem;
@@ -148,7 +148,7 @@
     
     .navbar-links {
         position: fixed;
-        top: 320px;
+        top: 100px;
         left: 0;
         right: 0;
         width: 100%;
@@ -284,3 +284,5 @@
         opacity: 0;
     }
 }
+
+
