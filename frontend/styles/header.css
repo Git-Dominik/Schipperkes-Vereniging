@@ -10,6 +10,7 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    z-index: 1000;
 }
 
 .header-items-container {
