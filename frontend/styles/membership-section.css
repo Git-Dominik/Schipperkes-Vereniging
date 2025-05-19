@@ -1,11 +1,51 @@
 .membership-section {
     padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.divider {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.paw-icon {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.section-intro {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .membership-content {
     display: flex;
     align-items: center;
     gap: 50px;
+    position: relative;
+    z-index: 2;
 }
 
 .membership-text {
@@ -23,6 +63,11 @@
     width: 100%;
     height: auto;
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.membership-image:hover img {
+    transform: scale(1.03);
 }
 
 .membership-text h3 {
@@ -57,10 +102,42 @@
     gap: 20px;
 }
 
+.btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
 .membership-price {
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
+}
+
+.decorative-image-left {
+    position: absolute;
+    width: 300px;
+    left: -45%;
+    top: 50%;
+    transform: translateY(-50%) rotate(30deg);
+    pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+    .decorative-image-left {
+        width: 250px;
+        opacity: 0.7;
+    }
 }
 
 @media (max-width: 992px) {
@@ -70,5 +147,38 @@
     
     .membership-image {
         margin-bottom: 30px;
+        max-width: 600px;
+        width: 100%;
+    }
+    
+    .decorative-image-left {
+        width: 200px;
+        left: -15%;
+    }
+}
+
+@media (max-width: 768px) {
+    .decorative-image-left {
+        display: none;
+    }
+    
+    .membership-text h3 {
+        font-size: 1.6rem;
+    }
+    
+    .benefits-list li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .membership-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
     }
 }
