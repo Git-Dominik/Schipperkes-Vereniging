@@ -76,14 +76,26 @@
     opacity: 0.8;
 }
 
-.test {
-    width: 100%;
-    height: 40vh;
-    background-color: #f8f9fa;
-}
-
 .svg-curve {
     position: absolute;
     bottom: -1px;
     width: 100%;
+}
+
+@media (max-width: 576px) {
+    .hero-text-container h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-text-container p {
+        font-size: 1.2rem;
+    }
+    
+    .hero-button-container {
+        flex-direction: column;
+    }
+    
+    .hero-button-container a {
+        width: 100%;
+    }
 }
