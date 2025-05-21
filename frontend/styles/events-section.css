@@ -11,6 +11,7 @@
 
 .event-card {
     display: flex;
+    flex-direction: column;
     background: white;
     border-radius: 10px;
     overflow: hidden;
@@ -52,6 +53,7 @@
 
 .event-meta {
     display: flex;
+    justify-content: space-between;
     gap: 15px;
     margin-bottom: 15px;
     font-size: 0.9rem;
@@ -78,11 +80,7 @@
     text-align: center;
 }
 
-@media (max-width: 768px) {
-    .event-card {
-        flex-direction: column;
-    }
-    
+@media (max-width: 768px) {    
     .event-date {
         width: 100%;
         flex-direction: row;
