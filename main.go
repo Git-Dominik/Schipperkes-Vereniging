@@ -3,7 +3,6 @@ package main
 import (
 	"Git-Dominik/Schipperkes-Vereniging/db"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"slices"
@@ -14,11 +13,14 @@ import (
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
-	db := &db.DB{}
+	db := &db.SchipperkesDB{}
 	db.Setup("data.db")
+	admin := db.GetAdminUser()
 	if slices.Contains(os.Args, "debug") {
 		gin.SetMode(gin.DebugMode)
 	}
+	fmt.Println("Email:")
+	fmt.Println(admin.Email)
 	router := gin.Default()
 	router.LoadHTMLGlob("frontend/*.html")
 	router.Static("/styles", "./frontend/styles/")
@@ -34,19 +36,23 @@ func main() {
 	})
 
 	router.GET("/admin", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "adminpanel.html", gin.H{})
+	})
+
+	router.GET("/admin-login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminlogin.html", gin.H{})
 	})
 
 	router.POST("/admin/login", func(ctx *gin.Context) {
+		email := ctx.PostForm("adminEmail")
 		password := ctx.PostForm("adminPassword")
-		// Type = []uint8
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-		if err != nil {
-			log.Fatal(err)
+		err := bcrypt.CompareHashAndPassword(admin.HashedPassword, []byte(password))
+		if err != nil || email != admin.Email {
 			ctx.HTML(http.StatusOK, "loginfailed.html", gin.H{})
+			return
 		}
-		fmt.Println(hashedPassword)
-
+		// Tell htmx to go to /admin
+		ctx.Header("HX-Redirect", "/admin")
 	})
 
 	router.Run(":8080")
