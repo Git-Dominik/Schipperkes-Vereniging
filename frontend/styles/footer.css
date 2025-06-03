@@ -1,13 +1,20 @@
 .site-footer {
     background-color: var(--second-primary);
     padding: 40px 0 20px;
-    width: 100%;
-
+    width: 100vw; /* Use viewport width instead of 100% */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: auto; /* This pushes the footer to the bottom */
+    flex-shrink: 0; /* Prevent footer from shrinking */
 }
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+    
 }
 .footer-top {
     display: flex;
