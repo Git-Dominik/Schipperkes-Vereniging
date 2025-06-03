@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Git-Dominik/Schipperkes-Vereniging/db"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,6 +14,8 @@ import (
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
+	db := &db.DB{}
+	db.Setup("data.db")
 	if slices.Contains(os.Args, "debug") {
 		gin.SetMode(gin.DebugMode)
 	}
