@@ -1,0 +1,172 @@
+.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
+
+        .bestuur-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5em;
+            color: var(--second-primary);
+            margin-bottom: 20px;
+        }
+
+        .section-title p {
+            font-size: 1.1em;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bestuur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .bestuur-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bestuur-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+        }
+
+        .bestuur-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .bestuur-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(224, 95, 3, 0.3);
+        }
+
+        .bestuur-avatar::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+        }
+
+        .bestuur-functie {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bestuur-naam {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--second-primary);
+            margin-bottom: 15px;
+        }
+
+        .bestuur-beschrijving {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, var(--second-primary) 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/Schipperkes-Vereniging/frontend/images/vader\ en\ zoon.jpg') center/cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+
+
+        @media (max-width: 768px) {            
+            .bestuur-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .bestuur-card {
+                padding: 30px 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2em;
+            }
+        }
