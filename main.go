@@ -1,14 +1,16 @@
 package main
 
 import (
+	"Git-Dominik/Schipperkes-Vereniging/auth"
 	"Git-Dominik/Schipperkes-Vereniging/db"
-	"fmt"
 	"net/http"
 	"os"
 	"slices"
+	"time"
 
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 )
 
 func main() {
@@ -19,9 +21,12 @@ func main() {
 	if slices.Contains(os.Args, "debug") {
 		gin.SetMode(gin.DebugMode)
 	}
-	fmt.Println("Email:")
-	fmt.Println(admin.Email)
+	authManager := auth.AuthManager{Admin: &admin, DB: db}
 	router := gin.Default()
+	store := cookie.NewStore([]byte("secret"))
+
+	store.Options(sessions.Options{MaxAge: int(30 * time.Minute), Path: "/", HttpOnly: true, Secure: true}) // Set session options
+	router.Use(sessions.Sessions("admin-session", store))
 	router.LoadHTMLGlob("frontend/*.html")
 	router.Static("/styles", "./frontend/styles/")
 	router.Static("/images", "./frontend/images/")
@@ -35,25 +40,18 @@ func main() {
 		ctx.HTML(http.StatusOK, "geschiedenis.html", gin.H{})
 	})
 
-	router.GET("/admin", func(ctx *gin.Context) {
+	adminGroup := router.Group("/admin")
+	adminGroup.Use(authManager.AuthMiddleware())
+
+	adminGroup.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminpanel.html", gin.H{})
 	})
 
-	router.GET("/admin-login", func(ctx *gin.Context) {
+	router.GET("/admin/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminlogin.html", gin.H{})
 	})
 
-	router.POST("/admin/login", func(ctx *gin.Context) {
-		email := ctx.PostForm("adminEmail")
-		password := ctx.PostForm("adminPassword")
-		err := bcrypt.CompareHashAndPassword(admin.HashedPassword, []byte(password))
-		if err != nil || email != admin.Email {
-			ctx.HTML(http.StatusOK, "loginfailed.html", gin.H{})
-			return
-		}
-		// Tell htmx to go to /admin
-		ctx.Header("HX-Redirect", "/admin")
-	})
+	adminGroup.POST("/login", authManager.LoginHandler)
 
 	router.Run(":8080")
 }

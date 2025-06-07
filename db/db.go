@@ -18,6 +18,7 @@ type Admin struct {
 	gorm.Model
 	HashedPassword []byte
 	Email          string
+	AdminUUID      string
 }
 
 type Announcement struct {
