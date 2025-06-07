@@ -29,7 +29,7 @@ func main() {
 
 	store.Options(sessions.Options{MaxAge: int(30 * time.Minute), Path: "/", HttpOnly: true, Secure: true})
 	router.Use(sessions.Sessions("admin-session", store))
-	router.LoadHTMLGlob("frontend/**/*.html")
+	router.LoadHTMLGlob("./**/*.html")
 	router.Static("/styles", "./frontend/styles/")
 	router.Static("/images", "./frontend/images/")
 	router.Static("/scripts", "./frontend/scripts/")
@@ -40,6 +40,10 @@ func main() {
 
 	router.GET("/geschiedenis", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "geschiedenis.html", gin.H{})
+	})
+
+	router.GET("/bestuur", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "bestuur.html", gin.H{})
 	})
 
 	router.GET("/admin/login", func(ctx *gin.Context) {
