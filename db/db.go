@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -22,7 +21,8 @@ type Admin struct {
 }
 
 type Announcement struct {
-	UUID    uuid.UUID
+	gorm.Model
+	UUID    string
 	Message string
 }
 
@@ -56,4 +56,24 @@ func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
 	}
 
 	return admin
+}
+
+func (schipperkesDB *SchipperkesDB) GetAnnouncements() []Announcement {
+	db := schipperkesDB.GormDB
+	var announcements []Announcement
+	err := db.Find(&announcements).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		announcements = []Announcement{}
+	}
+	return announcements
+}
+
+func (schipperkesDB *SchipperkesDB) AddAnnouncement(announcement *Announcement) {
+	db := schipperkesDB.GormDB
+	db.Create(announcement)
+}
+
+func (schipperkesDB *SchipperkesDB) RemoveAnnouncementByUUID(uuid string) {
+	db := schipperkesDB.GormDB
+	db.Where("UUID = ?", uuid).Delete(&Announcement{})
 }

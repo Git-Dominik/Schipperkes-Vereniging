@@ -1,0 +1,15 @@
+{{ range .announcementList}}
+<div class="item" style="display: flex; flex-direction: row">
+  <p>{{ .Message }}</p>
+  <button
+    type="button"
+    hx-post="/admin/announcements/api/remove"
+    hx-target="closest .item"
+    hx-swap="delete"
+    hx-confirm="Are you sure?"
+    hx-vals='{"UUID": "{{ .UUID }}"}'
+  >
+    Verwijder
+  </button>
+</div>
+{{ end }}

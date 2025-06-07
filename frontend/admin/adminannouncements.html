@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="/scripts/htmx.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Announcements</title>
+  </head>
+  <body>
+    <div class="announcements-container">
+      <div class="announcements-add">
+        <form
+          hx-post="/admin/announcements/api/submit"
+          hx-trigger="submit"
+          hx-target=".announcement-list"
+          hx-swap="innerHTML"
+        >
+          <input type="text" name="message" />
+          <button type="submit">Toevoegen</button>
+        </form>
+      </div>
+      <div
+        class="announcement-list"
+        hx-get="/admin/announcements/api/get-all"
+        hx-trigger="load"
+        hx-swap="innerHTML"
+      ></div>
+    </div>
+  </body>
+</html>
