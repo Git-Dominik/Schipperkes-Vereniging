@@ -3,8 +3,11 @@ package main
 import (
 	"Git-Dominik/Schipperkes-Vereniging/auth"
 	"Git-Dominik/Schipperkes-Vereniging/db"
+	"html/template"
+	"io/fs"
 	"net/http"
 	"os"
+	"path/filepath"
 	"slices"
 	"time"
 
@@ -13,6 +16,20 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
+
+func loadTemplates(pattern string) *template.Template {
+	tmpl := template.New("")
+	filepath.WalkDir(".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if !d.IsDir() && filepath.Ext(path) == ".html" {
+			tmpl.ParseFiles(path)
+		}
+		return nil
+	})
+	return tmpl
+}
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
@@ -29,7 +46,8 @@ func main() {
 
 	store.Options(sessions.Options{MaxAge: int(30 * time.Minute), Path: "/", HttpOnly: true, Secure: true})
 	router.Use(sessions.Sessions("admin-session", store))
-	router.LoadHTMLGlob("./**/*.html")
+	// router.LoadHTMLGlob("./**/*.html")
+	router.SetHTMLTemplate(loadTemplates("."))
 	router.Static("/styles", "./frontend/styles/")
 	router.Static("/images", "./frontend/images/")
 	router.Static("/scripts", "./frontend/scripts/")
