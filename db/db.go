@@ -3,6 +3,7 @@ package db
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
@@ -44,8 +45,8 @@ func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
 	err := db.First(&admin).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("No admin account found creating default account.")
-		admin.Email = "ezraschutte227@gmail.com"
-		defaultPassword := "admin"
+		admin.Email = os.Getenv("DEFAULT_EMAIL")
+		defaultPassword := os.Getenv("DEFAULT_PASSWORD")
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(defaultPassword), bcrypt.DefaultCost)
 		if err != nil {
 			fmt.Println(err)

@@ -5,6 +5,7 @@ import (
 	"Git-Dominik/Schipperkes-Vereniging/db"
 	"html/template"
 	"io/fs"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -15,6 +16,7 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/joho/godotenv"
 )
 
 func loadTemplates(pattern string) *template.Template {
@@ -32,6 +34,10 @@ func loadTemplates(pattern string) *template.Template {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file: " + err.Error())
+	}
 	gin.SetMode(gin.ReleaseMode)
 	database := &db.SchipperkesDB{}
 	database.Setup("data.db")
