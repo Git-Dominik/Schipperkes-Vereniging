@@ -73,6 +73,7 @@ func main() {
 	router.GET("/admin/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminlogin.html", gin.H{})
 	})
+	router.POST("/admin/login", authManager.LoginHandler)
 
 	adminGroup := router.Group("/admin")
 	adminGroup.Use(authManager.AuthMiddleware())
@@ -84,8 +85,6 @@ func main() {
 	adminGroup.GET("/announcements", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminannouncements.html", gin.H{})
 	})
-
-	adminGroup.POST("/login", authManager.LoginHandler)
 
 	announcementApi := router.Group("/admin/announcements/api")
 	announcementApi.GET("/get-all", func(ctx *gin.Context) {
