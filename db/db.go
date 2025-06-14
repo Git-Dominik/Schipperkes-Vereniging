@@ -23,6 +23,7 @@ type Admin struct {
 
 type Announcement struct {
 	gorm.Model
+	Title   string
 	UUID    string
 	Message string
 }
@@ -37,6 +38,15 @@ func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {
 	db.AutoMigrate(&Admin{})
 	db.AutoMigrate(&Announcement{})
 	schipperkesDB.GormDB = db
+}
+
+func (schipperkesDB *SchipperkesDB) GetAnnouncementByUUID(uuid string) (*Announcement, error) {
+	db := schipperkesDB.GormDB
+	var announcement Announcement
+	if err := db.Where("UUID = ?", uuid).First(&announcement).Error; err != nil {
+		return nil, err
+	}
+	return &announcement, nil
 }
 
 func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
@@ -55,7 +65,6 @@ func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
 		admin.HashedPassword = hashedPassword
 		db.Create(&admin)
 	}
-
 	return admin
 }
 

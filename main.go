@@ -3,13 +3,14 @@ package main
 import (
 	"Git-Dominik/Schipperkes-Vereniging/auth"
 	"Git-Dominik/Schipperkes-Vereniging/db"
+	"fmt"
 	"html/template"
-	"io/fs"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 	"slices"
+	"strings"
 	"time"
 
 	"github.com/gin-contrib/sessions"
@@ -19,18 +20,24 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func loadTemplates(pattern string) *template.Template {
+func loadTemplates(pattern string) (*template.Template, error) {
 	tmpl := template.New("")
-	filepath.WalkDir(".", func(path string, d fs.DirEntry, err error) error {
+	err := filepath.WalkDir(".", func(path string, d os.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-		if !d.IsDir() && filepath.Ext(path) == ".html" {
-			tmpl.ParseFiles(path)
+		if !d.IsDir() && strings.HasSuffix(path, ".html") {
+			_, err := tmpl.ParseFiles(path)
+			if err != nil {
+				return err
+			}
 		}
 		return nil
 	})
-	return tmpl
+	if err != nil {
+		return nil, err
+	}
+	return tmpl, nil
 }
 
 func main() {
@@ -53,7 +60,12 @@ func main() {
 	store.Options(sessions.Options{MaxAge: int(30 * time.Minute), Path: "/", HttpOnly: true, Secure: true})
 	router.Use(sessions.Sessions("admin-session", store))
 	// router.LoadHTMLGlob("./**/*.html")
-	router.SetHTMLTemplate(loadTemplates("."))
+	tmpl, err := loadTemplates(".html")
+	if err != nil {
+		panic("Could not load templates: " + err.Error())
+	}
+
+	router.SetHTMLTemplate(tmpl)
 	router.Static("/styles", "./frontend/styles/")
 	router.Static("/images", "./frontend/images/")
 	router.Static("/scripts", "./frontend/scripts/")
@@ -73,6 +85,7 @@ func main() {
 	router.GET("/admin/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminlogin.html", gin.H{})
 	})
+
 	router.POST("/admin/login", authManager.LoginHandler)
 
 	adminGroup := router.Group("/admin")
@@ -87,17 +100,58 @@ func main() {
 	})
 
 	announcementApi := router.Group("/admin/announcements/api")
-	announcementApi.GET("/get-all", func(ctx *gin.Context) {
+
+	announcementApi.GET("/get/all", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{
-			"announcementList": announcementList,
+			"announcementList": database.GetAnnouncements(),
 		})
 	})
 
+	announcementApi.GET("/get/:uuid", func(ctx *gin.Context) {
+		uuid := ctx.Param("uuid")
+		announcement, err := database.GetAnnouncementByUUID(uuid)
+		if err != nil {
+			ctx.HTML(http.StatusBadRequest, "", gin.H{})
+		}
+		// Uses list here but works in this case
+		announcementList := []db.Announcement{*announcement}
+		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{"announcementList": announcementList})
+	})
+
+	announcementApi.GET("/get/:uuid/edit", func(ctx *gin.Context) {
+		uuid := ctx.Param("uuid")
+		announcement, err := database.GetAnnouncementByUUID(uuid)
+		if err != nil {
+			ctx.HTML(http.StatusBadRequest, "", gin.H{})
+		}
+		ctx.HTML(http.StatusOK, "announcementEditTemplate.html", gin.H{"announcement": announcement})
+	})
+
+	announcementApi.PUT("/update/:uuid", func(ctx *gin.Context) {
+		uuid := ctx.Param("uuid")
+		title := ctx.PostForm("titel")
+		message := ctx.PostForm("bericht")
+
+		announcement, err := database.GetAnnouncementByUUID(uuid)
+		if err != nil {
+			fmt.Println("not found")
+			ctx.HTML(http.StatusBadRequest, "", gin.H{})
+		}
+		announcement.Message = message
+		announcement.Title = title
+		database.GormDB.Save(&announcement)
+		// Uses list here but works in this case
+		announcementList := []db.Announcement{*announcement}
+		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{"announcementList": announcementList})
+	})
+
 	announcementApi.POST("/submit", func(ctx *gin.Context) {
-		message := ctx.PostForm("message")
+		title := ctx.PostForm("titel")
+		message := ctx.PostForm("bericht")
 		newAnnouncement := db.Announcement{
 			UUID:    uuid.New().String(),
 			Message: message,
+			Title:   title,
 		}
 		database.AddAnnouncement(&newAnnouncement)
 		announcementList = database.GetAnnouncements()
@@ -105,7 +159,6 @@ func main() {
 			"announcementList": announcementList,
 		})
 	})
-
 	announcementApi.POST("/remove", func(ctx *gin.Context) {
 		uuid := ctx.PostForm("UUID")
 		database.RemoveAnnouncementByUUID(uuid)

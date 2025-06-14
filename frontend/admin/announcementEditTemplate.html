@@ -1,0 +1,21 @@
+<form
+  hx-put="/admin/announcements/api/update/{{.announcement.UUID}}"
+  hx-target="this"
+  hx-swap="outerHTML"
+>
+  <div>
+    <label>Titel</label>
+    <input type="text" name="titel" value="{{ .announcement.Title }}" />
+  </div>
+  <div class="form-group">
+    <label>Bericht</label>
+    <input type="text" name="bericht" value="{{ .announcement.Message }}" />
+  </div>
+  <button class="btn">Verander</button>
+  <button
+    class="btn"
+    hx-get="/admin/announcements/api/get/{{.announcement.UUID}}"
+  >
+    Cancel
+  </button>
+</form>
