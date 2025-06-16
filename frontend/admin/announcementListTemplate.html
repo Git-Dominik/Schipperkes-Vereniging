@@ -7,6 +7,8 @@
 >
   <p>{{ .Title }}</p>
   <p>{{ .Message }}</p>
+  <p>{{ .Location }}</p>
+  <p>{{ .CreatedAt }}</p>
   <button
     type="button"
     hx-post="/admin/announcements/api/remove"

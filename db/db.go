@@ -23,9 +23,10 @@ type Admin struct {
 
 type Announcement struct {
 	gorm.Model
-	Title   string
-	UUID    string
-	Message string
+	Title    string
+	UUID     string
+	Message  string
+	Location string
 }
 
 func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {

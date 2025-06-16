@@ -44,6 +44,7 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file: " + err.Error())
+		return
 	}
 	gin.SetMode(gin.ReleaseMode)
 	database := &db.SchipperkesDB{}
@@ -131,6 +132,7 @@ func main() {
 		uuid := ctx.Param("uuid")
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
+		location := ctx.PostForm("locatie")
 
 		announcement, err := database.GetAnnouncementByUUID(uuid)
 		if err != nil {
@@ -139,6 +141,7 @@ func main() {
 		}
 		announcement.Message = message
 		announcement.Title = title
+		announcement.Location = location
 		database.GormDB.Save(&announcement)
 		// Uses list here but works in this case
 		announcementList := []db.Announcement{*announcement}
@@ -148,10 +151,12 @@ func main() {
 	announcementApi.POST("/submit", func(ctx *gin.Context) {
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
+		location := ctx.PostForm("locatie")
 		newAnnouncement := db.Announcement{
-			UUID:    uuid.New().String(),
-			Message: message,
-			Title:   title,
+			UUID:     uuid.New().String(),
+			Message:  message,
+			Title:    title,
+			Location: location,
 		}
 		database.AddAnnouncement(&newAnnouncement)
 		announcementList = database.GetAnnouncements()
