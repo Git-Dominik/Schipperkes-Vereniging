@@ -2,7 +2,6 @@ package auth
 
 import (
 	"Git-Dominik/Schipperkes-Vereniging/db"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"
@@ -37,7 +36,6 @@ func (authManager *AuthManager) LoginHandler(ctx *gin.Context) {
 	admin := authManager.Admin
 	err := bcrypt.CompareHashAndPassword(admin.HashedPassword, []byte(password))
 	if err != nil || email != admin.Email {
-		fmt.Println("Login failed")
 		ctx.HTML(http.StatusOK, "loginfailed.html", gin.H{})
 		return
 	}

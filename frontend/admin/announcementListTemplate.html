@@ -1,6 +1,14 @@
 {{ range .announcementList}}
-<div class="item" style="display: flex; flex-direction: row">
+<div
+  hx-target="this"
+  hx-swap="outerHTML"
+  class="item"
+  style="display: flex; flex-direction: row"
+>
+  <p>{{ .Title }}</p>
   <p>{{ .Message }}</p>
+  <p>{{ .Location }}</p>
+  <p>{{ .CreatedAt }}</p>
   <button
     type="button"
     hx-post="/admin/announcements/api/remove"
@@ -10,6 +18,9 @@
     hx-vals='{"UUID": "{{ .UUID }}"}'
   >
     Verwijder
+  </button>
+  <button hx-get="/admin/announcements/api/get/{{.UUID}}/edit">
+    Click to edit
   </button>
 </div>
 {{ end }}

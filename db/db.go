@@ -3,6 +3,7 @@ package db
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
@@ -22,8 +23,10 @@ type Admin struct {
 
 type Announcement struct {
 	gorm.Model
-	UUID    string
-	Message string
+	Title    string
+	UUID     string
+	Message  string
+	Location string
 }
 
 func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {
@@ -38,14 +41,23 @@ func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {
 	schipperkesDB.GormDB = db
 }
 
+func (schipperkesDB *SchipperkesDB) GetAnnouncementByUUID(uuid string) (*Announcement, error) {
+	db := schipperkesDB.GormDB
+	var announcement Announcement
+	if err := db.Where("UUID = ?", uuid).First(&announcement).Error; err != nil {
+		return nil, err
+	}
+	return &announcement, nil
+}
+
 func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
 	db := schipperkesDB.GormDB
 	var admin Admin
 	err := db.First(&admin).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("No admin account found creating default account.")
-		admin.Email = "ezraschutte227@gmail.com"
-		defaultPassword := "admin"
+		admin.Email = os.Getenv("DEFAULT_EMAIL")
+		defaultPassword := os.Getenv("DEFAULT_PASSWORD")
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(defaultPassword), bcrypt.DefaultCost)
 		if err != nil {
 			fmt.Println(err)
@@ -54,7 +66,6 @@ func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
 		admin.HashedPassword = hashedPassword
 		db.Create(&admin)
 	}
-
 	return admin
 }
 
