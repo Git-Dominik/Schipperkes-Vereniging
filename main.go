@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"strconv"
 	"strings"
 	"time"
 
@@ -98,7 +99,25 @@ func main() {
 			Message             string
 			Location            string
 		}
+
 		activitiesList := database.GetActivities()
+
+		// Parse the optional "limit" query parameter
+		limitParam := ctx.DefaultQuery("limit", "")
+		var limit int
+		var err error
+		if limitParam != "" {
+			limit, err = strconv.Atoi(limitParam)
+			if err != nil || limit < 0 {
+				ctx.String(http.StatusBadRequest, "Invalid limit parameter")
+				return
+			}
+			if limit > len(activitiesList) {
+				limit = len(activitiesList)
+			}
+			activitiesList = activitiesList[:limit]
+		}
+
 		listOfEasyFormat := []easyFormat{}
 		for _, activity := range activitiesList {
 			easyFormatItem := easyFormat{
@@ -112,6 +131,7 @@ func main() {
 			}
 			listOfEasyFormat = append(listOfEasyFormat, easyFormatItem)
 		}
+
 		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{
 			"activityList": listOfEasyFormat,
 		})
