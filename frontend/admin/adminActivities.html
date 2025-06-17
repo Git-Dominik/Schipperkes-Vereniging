@@ -4,16 +4,15 @@
     <script src="/scripts/htmx.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Announcements</title>
-    <link rel="stylesheet" href="/styles/announcements.css" />
+    <title>Activiteiten</title>
   </head>
   <body>
-    <div class="announcements-container">
-      <div class="announcements-add">
+    <div class="activities-container">
+      <div class="activities-add">
         <form
-          hx-post="/admin/announcements/api/submit"
+          hx-post="/admin/activities/api/submit"
           hx-trigger="submit"
-          hx-target=".announcement-list"
+          hx-target=".activity-list"
           hx-swap="innerHTML"
         >
           <input type="text" name="titel" placeholder="Titel" />
@@ -27,8 +26,8 @@
         </form>
       </div>
       <div
-        class="announcement-list"
-        hx-get="/admin/announcements/api/get/all"
+        class="activity-list"
+        hx-get="/admin/activities/api/get/all"
         hx-trigger="load"
         hx-swap="innerHTML"
       ></div>

@@ -1,4 +1,4 @@
-{{ range .announcementList}}
+{{ range .activityList}}
 <div
   hx-target="this"
   hx-swap="outerHTML"
@@ -11,7 +11,7 @@
   <p>{{ .CreatedAt }}</p>
   <button
     type="button"
-    hx-post="/admin/announcements/api/remove"
+    hx-post="/admin/activities/api/remove"
     hx-target="closest .item"
     hx-swap="delete"
     hx-confirm="Are you sure?"
@@ -19,7 +19,7 @@
   >
     Verwijder
   </button>
-  <button hx-get="/admin/announcements/api/get/{{.UUID}}/edit">
+  <button hx-get="/admin/activities/api/get/{{.UUID}}/edit">
     Click to edit
   </button>
 </div>

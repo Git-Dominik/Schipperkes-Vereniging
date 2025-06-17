@@ -50,7 +50,7 @@ func main() {
 	database := &db.SchipperkesDB{}
 	database.Setup("data.db")
 	admin := database.GetAdminUser()
-	announcementList := database.GetAnnouncements()
+	activityList := database.GetActivities()
 	if slices.Contains(os.Args, "debug") {
 		gin.SetMode(gin.DebugMode)
 	}
@@ -83,11 +83,11 @@ func main() {
 		ctx.HTML(http.StatusOK, "bestuur.html", gin.H{})
 	})
 
-	router.GET("/meldingen", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "meldingen.html", gin.H{})
+	router.GET("/activiteiten", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "activiteiten.html", gin.H{})
 	})
 	router.GET("/admin/login", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "adminlogin.html", gin.H{})
+		ctx.HTML(http.StatusOK, "adminLogin.html", gin.H{})
 	})
 
 	router.POST("/admin/login", authManager.LoginHandler)
@@ -96,81 +96,81 @@ func main() {
 	adminGroup.Use(authManager.AuthMiddleware())
 
 	adminGroup.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "adminpanel.html", gin.H{})
+		ctx.HTML(http.StatusOK, "adminPanel.html", gin.H{})
 	})
 
-	adminGroup.GET("/announcements", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "adminannouncements.html", gin.H{})
+	adminGroup.GET("/activities", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "adminActivities.html", gin.H{})
 	})
 
-	announcementApi := router.Group("/admin/announcements/api")
+	activityApi := router.Group("/admin/activities/api")
 
-	announcementApi.GET("/get/all", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{
-			"announcementList": database.GetAnnouncements(),
+	activityApi.GET("/get/all", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{
+			"activityList": database.GetActivities(),
 		})
 	})
 
-	announcementApi.GET("/get/:uuid", func(ctx *gin.Context) {
+	activityApi.GET("/get/:uuid", func(ctx *gin.Context) {
 		uuid := ctx.Param("uuid")
-		announcement, err := database.GetAnnouncementByUUID(uuid)
+		activity, err := database.GetActivityByUUID(uuid)
 		if err != nil {
 			ctx.HTML(http.StatusBadRequest, "", gin.H{})
 		}
 		// Uses list here but works in this case
-		announcementList := []db.Announcement{*announcement}
-		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{"announcementList": announcementList})
+		activityList := []db.Activity{*activity}
+		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{"activityList": activityList})
 	})
 
-	announcementApi.GET("/get/:uuid/edit", func(ctx *gin.Context) {
+	activityApi.GET("/get/:uuid/edit", func(ctx *gin.Context) {
 		uuid := ctx.Param("uuid")
-		announcement, err := database.GetAnnouncementByUUID(uuid)
+		activity, err := database.GetActivityByUUID(uuid)
 		if err != nil {
 			ctx.HTML(http.StatusBadRequest, "", gin.H{})
 		}
-		ctx.HTML(http.StatusOK, "announcementEditTemplate.html", gin.H{"announcement": announcement})
+		ctx.HTML(http.StatusOK, "activityEditTemplate.html", gin.H{"activity": activity})
 	})
 
-	announcementApi.PUT("/update/:uuid", func(ctx *gin.Context) {
+	activityApi.PUT("/update/:uuid", func(ctx *gin.Context) {
 		uuid := ctx.Param("uuid")
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
 		location := ctx.PostForm("locatie")
 
-		announcement, err := database.GetAnnouncementByUUID(uuid)
+		activity, err := database.GetActivityByUUID(uuid)
 		if err != nil {
 			fmt.Println("not found")
 			ctx.HTML(http.StatusBadRequest, "", gin.H{})
 		}
-		announcement.Message = message
-		announcement.Title = title
-		announcement.Location = location
-		database.GormDB.Save(&announcement)
+		activity.Message = message
+		activity.Title = title
+		activity.Location = location
+		database.GormDB.Save(&activity)
 		// Uses list here but works in this case
-		announcementList := []db.Announcement{*announcement}
-		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{"announcementList": announcementList})
+		activityList := []db.Activity{*activity}
+		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{"activityList": activityList})
 	})
 
-	announcementApi.POST("/submit", func(ctx *gin.Context) {
+	activityApi.POST("/submit", func(ctx *gin.Context) {
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
 		location := ctx.PostForm("locatie")
-		newAnnouncement := db.Announcement{
+		newActivity := db.Activity{
 			UUID:     uuid.New().String(),
 			Message:  message,
 			Title:    title,
 			Location: location,
 		}
-		database.AddAnnouncement(&newAnnouncement)
-		announcementList = database.GetAnnouncements()
-		ctx.HTML(http.StatusOK, "announcementListTemplate.html", gin.H{
-			"announcementList": announcementList,
+		database.AddActivity(&newActivity)
+		activityList = database.GetActivities()
+		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{
+			"activityList": activityList,
 		})
 	})
-	announcementApi.POST("/remove", func(ctx *gin.Context) {
+	activityApi.POST("/remove", func(ctx *gin.Context) {
 		uuid := ctx.PostForm("UUID")
-		database.RemoveAnnouncementByUUID(uuid)
-		announcementList = database.GetAnnouncements()
+		database.RemoveActivityByUUID(uuid)
+		activityList = database.GetActivities()
 	})
 	router.Run(":8080")
 }

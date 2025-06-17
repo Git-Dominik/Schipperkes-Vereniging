@@ -1,0 +1,22 @@
+<form
+  hx-put="/admin/activities/api/update/{{.activity.UUID}}"
+  hx-target="this"
+  hx-swap="outerHTML"
+>
+  <div>
+    <label>Titel</label>
+    <input type="text" name="titel" value="{{ .activity.Title }}" />
+  </div>
+  <div class="form-group">
+    <label>Bericht</label>
+    <input type="text" name="bericht" value="{{ .activity.Message }}" />
+  </div>
+  <div class="form-group">
+    <label>Locatie</label>
+    <input type="text" name="locatie" value="{{ .activity.Location }}" />
+  </div>
+  <button class="btn">Verander</button>
+  <button class="btn" hx-get="/admin/activities/api/get/{{.activity.UUID}}">
+    Cancel
+  </button>
+</form>

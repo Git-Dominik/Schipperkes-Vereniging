@@ -21,7 +21,7 @@ type Admin struct {
 	AdminUUID      string
 }
 
-type Announcement struct {
+type Activity struct {
 	gorm.Model
 	Title    string
 	UUID     string
@@ -37,17 +37,17 @@ func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {
 	}
 	fmt.Println("Succesfully started database: " + databaseName)
 	db.AutoMigrate(&Admin{})
-	db.AutoMigrate(&Announcement{})
+	db.AutoMigrate(&Activity{})
 	schipperkesDB.GormDB = db
 }
 
-func (schipperkesDB *SchipperkesDB) GetAnnouncementByUUID(uuid string) (*Announcement, error) {
+func (schipperkesDB *SchipperkesDB) GetActivityByUUID(uuid string) (*Activity, error) {
 	db := schipperkesDB.GormDB
-	var announcement Announcement
-	if err := db.Where("UUID = ?", uuid).First(&announcement).Error; err != nil {
+	var activity Activity
+	if err := db.Where("UUID = ?", uuid).First(&activity).Error; err != nil {
 		return nil, err
 	}
-	return &announcement, nil
+	return &activity, nil
 }
 
 func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
@@ -69,22 +69,22 @@ func (schipperkesDB *SchipperkesDB) GetAdminUser() Admin {
 	return admin
 }
 
-func (schipperkesDB *SchipperkesDB) GetAnnouncements() []Announcement {
+func (schipperkesDB *SchipperkesDB) GetActivities() []Activity {
 	db := schipperkesDB.GormDB
-	var announcements []Announcement
-	err := db.Find(&announcements).Error
+	var activityList []Activity
+	err := db.Find(&activityList).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		announcements = []Announcement{}
+		activityList = []Activity{}
 	}
-	return announcements
+	return activityList
 }
 
-func (schipperkesDB *SchipperkesDB) AddAnnouncement(announcement *Announcement) {
+func (schipperkesDB *SchipperkesDB) AddActivity(activity *Activity) {
 	db := schipperkesDB.GormDB
-	db.Create(announcement)
+	db.Create(activity)
 }
 
-func (schipperkesDB *SchipperkesDB) RemoveAnnouncementByUUID(uuid string) {
+func (schipperkesDB *SchipperkesDB) RemoveActivityByUUID(uuid string) {
 	db := schipperkesDB.GormDB
-	db.Where("UUID = ?", uuid).Delete(&Announcement{})
+	db.Where("UUID = ?", uuid).Delete(&Activity{})
 }
