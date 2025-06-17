@@ -83,6 +83,9 @@ func main() {
 		ctx.HTML(http.StatusOK, "bestuur.html", gin.H{})
 	})
 
+	router.GET("/meldingen", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "meldingen.html", gin.H{})
+	})
 	router.GET("/admin/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminlogin.html", gin.H{})
 	})
