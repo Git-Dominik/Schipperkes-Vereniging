@@ -86,6 +86,37 @@ func main() {
 	router.GET("/activiteiten", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "activiteiten.html", gin.H{})
 	})
+
+	router.GET("/activiteiten/get/all", func(ctx *gin.Context) {
+		// Make it easy to print in html without needing to process the data in javascript
+		type easyFormat struct {
+			DayEasyFormat       int
+			MonthEasyFormat     string
+			StartTimeEasyFormat string
+			EndTimeEasyFormat   string
+			Title               string
+			Message             string
+			Location            string
+		}
+		activitiesList := database.GetActivities()
+		listOfEasyFormat := []easyFormat{}
+		for _, activity := range activitiesList {
+			easyFormatItem := easyFormat{
+				DayEasyFormat:       activity.DateTimeStart.Day(),
+				MonthEasyFormat:     activity.DateTimeStart.Month().String(),
+				StartTimeEasyFormat: activity.DateTimeStart.Format("15:04"),
+				EndTimeEasyFormat:   activity.DateTimeEnd.Format("15:04"),
+				Title:               activity.Title,
+				Message:             activity.Message,
+				Location:            activity.Location,
+			}
+			listOfEasyFormat = append(listOfEasyFormat, easyFormatItem)
+		}
+		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{
+			"activityList": listOfEasyFormat,
+		})
+	})
+
 	router.GET("/admin/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "adminLogin.html", gin.H{})
 	})
@@ -106,7 +137,7 @@ func main() {
 	activityApi := router.Group("/admin/activities/api")
 
 	activityApi.GET("/get/all", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{
+		ctx.HTML(http.StatusOK, "activityListTemplateAdmin.html", gin.H{
 			"activityList": database.GetActivities(),
 		})
 	})
@@ -119,7 +150,7 @@ func main() {
 		}
 		// Uses list here but works in this case
 		activityList := []db.Activity{*activity}
-		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{"activityList": activityList})
+		ctx.HTML(http.StatusOK, "activityListTemplateAdmin.html", gin.H{"activityList": activityList})
 	})
 
 	activityApi.GET("/get/:uuid/edit", func(ctx *gin.Context) {
@@ -136,8 +167,15 @@ func main() {
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
 		location := ctx.PostForm("locatie")
-		dateTimePost := ctx.PostForm("datumTijd")
-		dateTime, err := time.Parse("2006-01-02T15:04", dateTimePost)
+		dateTimeStartPost := ctx.PostForm("datumTijdStart")
+		dateTimeEindPost := ctx.PostForm("datumTijdEnd")
+		dateTimeStart, err := time.Parse("2006-01-02T15:04", dateTimeStartPost)
+		if err != nil {
+			log.Fatal("Could not parse date", err)
+			ctx.String(http.StatusBadRequest, "Could not parse date", gin.H{})
+			return
+		}
+		dateTimeEnd, err := time.Parse("2006-01-02T15:04", dateTimeEindPost)
 		if err != nil {
 			log.Fatal("Could not parse date", err)
 			ctx.String(http.StatusBadRequest, "Could not parse date", gin.H{})
@@ -152,7 +190,8 @@ func main() {
 		activity.Message = message
 		activity.Title = title
 		activity.Location = location
-		activity.DateTime = dateTime
+		activity.DateTimeStart = dateTimeStart
+		activity.DateTimeEnd = dateTimeEnd
 		database.GormDB.Save(&activity)
 		// Uses list here but works in this case
 		activityList := []db.Activity{*activity}
@@ -163,23 +202,31 @@ func main() {
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
 		location := ctx.PostForm("locatie")
-		dateTimePost := ctx.PostForm("datumTijd")
-		dateTime, err := time.Parse("2006-01-02T15:04", dateTimePost)
+		dateTimeStartPost := ctx.PostForm("datumTijdStart")
+		dateTimeEindPost := ctx.PostForm("datumTijdEnd")
+		dateTimeStart, err := time.Parse("2006-01-02T15:04", dateTimeStartPost)
 		if err != nil {
-			log.Fatal("Could not parse date", err)
+			log.Fatal("Could not parse start date: ", err)
+			ctx.String(http.StatusBadRequest, "Could not parse date", gin.H{})
+			return
+		}
+		dateTimeEnd, err := time.Parse("2006-01-02T15:04", dateTimeEindPost)
+		if err != nil {
+			log.Fatal("Could not parse end date: ", err)
 			ctx.String(http.StatusBadRequest, "Could not parse date", gin.H{})
 			return
 		}
 		newActivity := db.Activity{
-			UUID:     uuid.New().String(),
-			Message:  message,
-			Title:    title,
-			Location: location,
-			DateTime: dateTime,
+			UUID:          uuid.New().String(),
+			Message:       message,
+			Title:         title,
+			Location:      location,
+			DateTimeStart: dateTimeStart,
+			DateTimeEnd:   dateTimeEnd,
 		}
 		database.AddActivity(&newActivity)
 		activityList = database.GetActivities()
-		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{
+		ctx.HTML(http.StatusOK, "activityListTemplateAdmin.html", gin.H{
 			"activityList": activityList,
 		})
 	})

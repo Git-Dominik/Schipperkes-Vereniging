@@ -1,0 +1,18 @@
+{{ range .activityList }}
+
+<div class="event-card">
+  <div class="event-date">
+    <span class="day">14</span>
+    <span class="month">Jun</span>
+  </div>
+  <div class="event-details">
+    <h3>{{ .Title }}</h3>
+    <div class="event-meta">
+      <span><i class="fas fa-map-marker-alt"></i> {{ .Location }}</span>
+      <span><i class="fas fa-clock"></i> 10:00 - 17:00</span>
+    </div>
+    <p>{{ .Message }}</p>
+    <a href="#" class="btn-secondary">Meer informatie</a>
+  </div>
+</div>
+{{ end }}

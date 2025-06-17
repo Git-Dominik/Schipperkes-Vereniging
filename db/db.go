@@ -24,11 +24,12 @@ type Admin struct {
 
 type Activity struct {
 	gorm.Model
-	Title    string
-	UUID     string
-	Message  string
-	Location string
-	DateTime time.Time
+	Title         string
+	UUID          string
+	Message       string
+	Location      string
+	DateTimeStart time.Time
+	DateTimeEnd   time.Time
 }
 
 func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {

@@ -5,6 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Activiteiten</title>
+    <style>
+      .form-item {
+        display: flex;
+        flex-direction: column;
+      }
+      * {
+        padding: 15px;
+      }
+    </style>
   </head>
   <body>
     <div class="activities-container">
@@ -15,21 +24,34 @@
           hx-target=".activity-list"
           hx-swap="innerHTML"
         >
-          <input type="text" name="titel" placeholder="Titel" required />
-          <input type="text" name="bericht" placeholder="Bericht" required />
-          <input
-            type="datetime-local"
-            name="datumTijd"
-            placeholder="Datum"
-            required
-          />
-          <input
-            type="text"
-            name="locatie"
-            placeholder="Woerden, Waardsedijk 50"
-            required
-          />
-          <button type="submit">Toevoegen</button>
+          <div class="form-item">
+            <label>Title</label>
+            <input type="text" name="titel" placeholder="Titel" required />
+          </div>
+          <div class="form-item">
+            <label>Bericht</label>
+            <input type="text" name="bericht" placeholder="Bericht" required />
+          </div>
+          <div class="form-item">
+            <label>Start Datum/Tijd</label>
+            <input type="datetime-local" name="datumTijdStart" required />
+          </div>
+          <div class="form-item">
+            <label>Eind Datum/Tijd</label>
+            <input type="datetime-local" name="datumTijdEnd" required />
+          </div>
+          <div class="form-item">
+            <label>Locatie</label>
+            <input
+              type="text"
+              name="locatie"
+              placeholder="Woerden, Waardsedijk 50"
+              required
+            />
+          </div>
+          <div class="form-item">
+            <button type="submit">Toevoegen</button>
+          </div>
         </form>
       </div>
       <div

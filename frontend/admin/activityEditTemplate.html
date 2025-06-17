@@ -5,22 +5,42 @@
 >
   <div>
     <label>Titel</label>
-    <input type="text" name="titel" value="{{ .activity.Title }}" />
+    <input type="text" name="titel" value="{{ .activity.Title }}" required />
   </div>
   <div class="form-group">
     <label>Bericht</label>
-    <input type="text" name="bericht" value="{{ .activity.Message }}" />
+    <input
+      type="text"
+      name="bericht"
+      value="{{ .activity.Message }}"
+      required
+    />
   </div>
   <div class="form-group">
     <label>Locatie</label>
-    <input type="text" name="locatie" value="{{ .activity.Location }}" />
+    <input
+      type="text"
+      name="locatie"
+      value="{{ .activity.Location }}"
+      required
+    />
   </div>
   <div class="form-group">
-    <label>Datum en tijd</label>
+    <label>Start Datum/tijd</label>
     <input
       type="datetime-local"
-      name="datumTijd"
-      value="{{ .activity.DateTime }}"
+      name="datumTijdStart"
+      value="{{ .activity.DateTimeStart }}"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label>Eind Datum/tijd</label>
+    <input
+      type="datetime-local"
+      name="datumTijdEnd"
+      value="{{ .activity.DateTimeEnd }}"
+      required
     />
   </div>
   <button class="btn">Verander</button>
