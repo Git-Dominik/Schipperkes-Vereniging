@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
@@ -27,6 +28,7 @@ type Activity struct {
 	UUID     string
 	Message  string
 	Location string
+	DateTime time.Time
 }
 
 func (schipperkesDB *SchipperkesDB) Setup(databaseName string) {

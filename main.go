@@ -126,7 +126,7 @@ func main() {
 		uuid := ctx.Param("uuid")
 		activity, err := database.GetActivityByUUID(uuid)
 		if err != nil {
-			ctx.HTML(http.StatusBadRequest, "", gin.H{})
+			ctx.String(http.StatusBadRequest, "Activity not found", gin.H{})
 		}
 		ctx.HTML(http.StatusOK, "activityEditTemplate.html", gin.H{"activity": activity})
 	})
@@ -136,6 +136,13 @@ func main() {
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
 		location := ctx.PostForm("locatie")
+		dateTimePost := ctx.PostForm("datumTijd")
+		dateTime, err := time.Parse("2006-01-02T15:04", dateTimePost)
+		if err != nil {
+			log.Fatal("Could not parse date", err)
+			ctx.String(http.StatusBadRequest, "Could not parse date", gin.H{})
+			return
+		}
 
 		activity, err := database.GetActivityByUUID(uuid)
 		if err != nil {
@@ -145,6 +152,7 @@ func main() {
 		activity.Message = message
 		activity.Title = title
 		activity.Location = location
+		activity.DateTime = dateTime
 		database.GormDB.Save(&activity)
 		// Uses list here but works in this case
 		activityList := []db.Activity{*activity}
@@ -155,11 +163,19 @@ func main() {
 		title := ctx.PostForm("titel")
 		message := ctx.PostForm("bericht")
 		location := ctx.PostForm("locatie")
+		dateTimePost := ctx.PostForm("datumTijd")
+		dateTime, err := time.Parse("2006-01-02T15:04", dateTimePost)
+		if err != nil {
+			log.Fatal("Could not parse date", err)
+			ctx.String(http.StatusBadRequest, "Could not parse date", gin.H{})
+			return
+		}
 		newActivity := db.Activity{
 			UUID:     uuid.New().String(),
 			Message:  message,
 			Title:    title,
 			Location: location,
+			DateTime: dateTime,
 		}
 		database.AddActivity(&newActivity)
 		activityList = database.GetActivities()

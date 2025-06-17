@@ -15,12 +15,19 @@
           hx-target=".activity-list"
           hx-swap="innerHTML"
         >
-          <input type="text" name="titel" placeholder="Titel" />
-          <input type="text" name="bericht" placeholder="Bericht" />
+          <input type="text" name="titel" placeholder="Titel" required />
+          <input type="text" name="bericht" placeholder="Bericht" required />
+          <input
+            type="datetime-local"
+            name="datumTijd"
+            placeholder="Datum"
+            required
+          />
           <input
             type="text"
             name="locatie"
             placeholder="Woerden, Waardsedijk 50"
+            required
           />
           <button type="submit">Toevoegen</button>
         </form>
