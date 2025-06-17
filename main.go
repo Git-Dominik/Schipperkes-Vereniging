@@ -101,6 +101,9 @@ func main() {
 		}
 
 		activitiesList := database.GetActivities()
+		if len(activitiesList) <= 0 {
+			ctx.HTML(http.StatusOK, "geenActiviteitenGeplandTemplate.html", gin.H{})
+		}
 
 		// Parse the optional "limit" query parameter
 		limitParam := ctx.DefaultQuery("limit", "")
