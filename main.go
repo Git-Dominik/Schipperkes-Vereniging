@@ -71,6 +71,7 @@ func main() {
 	router.Static("/styles", "./frontend/styles/")
 	router.Static("/images", "./frontend/images/")
 	router.Static("/scripts", "./frontend/scripts/")
+	router.Static("/files", "./frontend/files/")
 
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "index.html", gin.H{})
