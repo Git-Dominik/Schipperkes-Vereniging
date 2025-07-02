@@ -1,0 +1,249 @@
+    .hero-section {
+        position: relative;
+        height: 400px;
+        background: linear-gradient(135deg, var(--second-primary) 0%, #16213e 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1551717743-49959800b1f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+        opacity: 0.8;
+    }
+
+    .hero-content {
+        position: relative;
+        text-align: center;
+        color: white;
+        z-index: 2;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .main-content {
+        flex: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .birth-announcement {
+        margin: 60px 0;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: var(--second-primary);
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .announcement-card {
+        background: var(--bg-color);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        margin: 30px 0;
+        transition: var(--transition);
+    }
+
+    .birth-date {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .parent-info {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        margin: 30px 0;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .parent-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 20px 0;
+    }
+
+    .parent-card {
+        background: var(--bg-color);
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .parent-title {
+        font-size: 1.3rem;
+        color: var(--second-primary);
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .parent-name {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .nhsb-number {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    
+
+    .health-info {
+        background: #e8f5e8;
+        padding: 25px;
+        border-radius: 10px;
+        margin: 30px 0;
+        border-left: 4px solid #28a745;
+    }
+
+    .health-title {
+        color: #28a745;
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin: 40px 0;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: var(--transition);
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background: var(--second-primary);
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #1a1a3e;
+        transform: translateY(-2px);
+    }
+
+    .puppy-photo-container {
+        margin-top: 40px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+
+
+    .puppy-main-photo {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        display: block;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @media (max-width: 768px) {
+        .hero-content h1 {
+            font-size: 2rem;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .announcement-card {
+            padding: 25px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn {
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+        }
+
+        .puppy-main-photo {
+            height: 250px;
+        }
+    }
