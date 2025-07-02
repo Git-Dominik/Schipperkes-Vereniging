@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/fokkers.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/nav.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/shared.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="./images/logo.png" alt="" />
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="navbar-links" id="navLinks">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        Vereniging
+                        <i class="nav-icon fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="bestuur.html" class="dropdown-link">
+                            <i class="fas fa-users"></i> Bestuur
+                        </a>
+                        <a href="inschijving.html" class="dropdown-link">
+                            <i class="fas fa-user-plus"></i> Lid worden
+                        </a>
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-paw"></i> Lid worden pupkopers
+                        </a>
+                        <a href="zuster.html" class="dropdown-link">
+                            <i class="fas fa-handshake"></i> Zusterverenigingen
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        Het schipperke
+                        <i class="nav-icon fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="geschiedenis.html" class="dropdown-link">
+                            <i class="fas fa-dog"></i> Geschiedenis
+                        </a>
+                        <a href="verzorging.html" class="dropdown-link">
+                            <i class="fas fa-history"></i> Verzorging
+                        </a>
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-baby"></i> Puppy's
+                        </a>
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-user-tie"></i> Fokkers
+                        </a>
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-file-pdf"></i> Fokregelement (pdf)
+                        </a>
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-images"></i> Fotoalbum
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        Activiteiten
+                        <i class="nav-icon fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-walking"></i> Activiteiten
+                        </a>
+                        <a href="#" class="dropdown-link">
+                            <i class="fas fa-trophy"></i> Showuitslagen
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="contact-button">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <section class="hero-section">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1>Erkende Fokkers</h1>
+            <p>Betrouwbare fokkers van gezonde en rasechte schipperkes</p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <h2 class="section-title">Onze Fokkers</h2>
+        <p class="section-subtitle">Een overzicht van erkende fokkers die aangesloten zijn bij Schipperkes Vrienden
+            Nederland</p>
+
+        <div class="info-highlight">
+            <h3><i class="fas fa-heart"></i> Kwaliteit en Zorg</h3>
+            <p>Alle hier vermelde fokkers staan bekend om hun toewijding aan het ras, hun zorg voor het welzijn van hun
+                honden en hun commitment aan gezonde fokpraktijken. Neem gerust contact op voor meer informatie over
+                beschikbare puppy's.</p>
+        </div>
+
+        <div class="breeders-container">
+            <!-- Groningen -->
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 class="region-title">
+                        <i class="fas fa-map-marker-alt region-icon"></i>
+                        Groningen <span class="country-flag">🇳🇱</span>
+                    </h3>
+                </div>
+                <div class="breeders-grid">
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Flashing Delights
+                        </h4>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Winschoterzijl 1, 9672TD Winschoten (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:0621588625" class="contact-link">0621588625</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:sandraklein@live.nl" class="contact-link">sandraklein@live.nl</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Noord-Holland -->
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 class="region-title">
+                        <i class="fas fa-map-marker-alt region-icon"></i>
+                        Noord-Holland <span class="country-flag">🇳🇱</span>
+                    </h3>
+                </div>
+                <div class="breeders-grid">
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Loinhoeve
+                        </h4>
+                        <p class="owner-name">Eigenaar: I. Kuijpers</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Driestedenweg 42, 1662 BG De Weere (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:0229581848" class="contact-link">0229-581848</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.loinhoeve.jouwweb.nl</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:kuijpers-louis@quicknet.nl"
+                                    class="contact-link">kuijpers-louis@quicknet.nl</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zuid-Holland -->
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 class="region-title">
+                        <i class="fas fa-map-marker-alt region-icon"></i>
+                        Zuid-Holland <span class="country-flag">🇳🇱</span>
+                    </h3>
+                </div>
+                <div class="breeders-grid">
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel van Jopie's Happy Home
+                        </h4>
+                        <p class="owner-name">Eigenaar: Jopie de Zeeuw-Boelee</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.schipperkeskennel.nl</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:jopiedezeeuwboelee@gmail.com"
+                                    class="contact-link">jopiedezeeuwboelee@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Noord-Brabant -->
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 class="region-title">
+                        <i class="fas fa-map-marker-alt region-icon"></i>
+                        Noord-Brabant <span class="country-flag">🇳🇱</span>
+                    </h3>
+                </div>
+                <div class="breeders-grid">
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Het Zwarte Schoffie
+                        </h4>
+                        <p class="owner-name">Eigenaar: Ronald & Isabelle Horde</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Dinteloord (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:0619114911" class="contact-link">06-19114911 (Ronald)</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.hetzwarteschoffie.nl</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:info@hetzwarteschoffie.nl"
+                                    class="contact-link">info@hetzwarteschoffie.nl</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Van Niemeskant
+                        </h4>
+                        <p class="owner-name">Eigenaar: Stein Muller en Eveline Muller-Smulders</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Pastoor van Schijndelstraat 17, 5469 PS Boerdonk
+                                    (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:0612598733" class="contact-link">06-12598733 (Eveline)</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.vanniemeskant.jimdo.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:eefje70@icloud.com" class="contact-link">eefje70@icloud.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel From Black Velvet's Home
+                        </h4>
+                        <p class="owner-name">Eigenaar: J.C. van den Broek Langermans</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Schijndelseweg 69, 5491TA Sint Oedenrode (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <span class="contact-text">
+                                    <a href="tel:0413478303" class="contact-link">0413-478303</a> of
+                                    <a href="tel:0630027639" class="contact-link">06-30027639</a>
+                                </span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.blackvelvetshome.nl</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:info@blackvelvetshome.nl"
+                                    class="contact-link">info@blackvelvetshome.nl</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel King Hubert's House
+                        </h4>
+                        <p class="owner-name">Eigenaar: A. Broks-Swanenberg</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Slothoef 36, 5291 NR Gemonde (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <span class="contact-text">
+                                    <a href="tel:0735516539" class="contact-link">073-5516539</a> /
+                                    <a href="tel:0611180217" class="contact-link">06-11180217</a>
+                                </span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.kinghubertshouse.nl</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:hubertbroks@gmail.com" class="contact-link">hubertbroks@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel van de Slabroekseheide
+                        </h4>
+                        <p class="owner-name">Eigenaar: J. van Summeren</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Burg. Schoutenstraat 11, 5374 HB Schaijk (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <span class="contact-text">
+                                    <a href="tel:0486436806" class="contact-link">0486-436806</a> /
+                                    <a href="tel:0651875802" class="contact-link">06-51875802</a>
+                                </span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:jan.enbetsy@home.nl" class="contact-link">jan.enbetsy@home.nl</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Limburg -->
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 class="region-title">
+                        <i class="fas fa-map-marker-alt region-icon"></i>
+                        Limburg <span class="country-flag">🇳🇱</span>
+                    </h3>
+                </div>
+                <div class="breeders-grid">
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Van Metcol's Home
+                        </h4>
+                        <p class="owner-name">Eigenaar: F. Metekohy</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Prinsenbaan 106, 6104 BH Koningsbosch (Nederland)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:0651178035" class="contact-link">06-51178035</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.vanmetcolshome.nl</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:f.metcol@gmail.com" class="contact-link">f.metcol@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- België -->
+            <div class="region-section">
+                <div class="region-header">
+                    <h3 class="region-title">
+                        <i class="fas fa-map-marker-alt region-icon"></i>
+                        België <span class="country-flag">🇧🇪</span>
+                    </h3>
+                </div>
+                <div class="breeders-grid">
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Van Het Kumtichshof
+                        </h4>
+                        <p class="owner-name">Eigenaar: Luc Claeys</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Vondelstraat 96, B-3300 Tienen (België)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:003216821013" class="contact-link">003216821013</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:joren.claeys@skynet.be" class="contact-link">joren.claeys@skynet.be</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel Van het Berdlenhuis
+                        </h4>
+                        <p class="owner-name">Eigenaar: Pascal Van Hijfte</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Vaartkant 8, 9931 Lievegem (België)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:0486796189" class="contact-link">0486 79 61 89</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:vaartkant8@skynet.be" class="contact-link">vaartkant8@skynet.be</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Kennel van 't Soethuys
+                        </h4>
+                        <p class="owner-name">Eigenaar: Brenda van Assche</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">L. Van Hoeymissenstraat 25, B-1840 Malderen / Londerzeel
+                                    (België)</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:+32486707649" class="contact-link">+32(0)486 707 649</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:b.van.assche@skynet.be" class="contact-link">b.van.assche@skynet.be</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breeder-card">
+                        <h4 class="kennel-name">
+                            <i class="fas fa-home kennel-icon"></i>
+                            Schipperkes kennel Des Iris Noirs
+                        </h4>
+                        <p class="owner-name">Eigenaar: Vande Casteele-Parreyn</p>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span class="contact-text">Roggestraat 20, 8600 Diksmuide</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <a href="tel:+324944080666" class="contact-link">+324944080666</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <a href="mailto:Info@desirsnoirs.be" class="contact-link">Info@desirsnoirs.be</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe contact-icon"></i>
+                                <a href="" class="contact-link website-link">www.desirisnoirs.be</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+        <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="./images/logo.png" alt="Logo Schipperkes Vrienden Nederland" />
+                    <h3>Schipperkes Vrienden Nederland</h3>
+                </div>
+
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <div class="footer-column">
+                        <h4>Navigatie</h4>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Vereniging</a></li>
+                            <li><a href="">Het schipperke</a></li>
+                            <li><a href="">Activiteiten</a></li>
+                            <li><a href="">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Het schipperke</h4>
+                        <ul>
+                            <li><a href="">Lid worden</a></li>
+                            <li><a href="">Gezondheid</a></li>
+                            <li><a href="">Verzorging</a></li>
+                            <li><a href="">Fokkerij</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a
+                                    href="mailto:info@schipperkesvriendennederland.nl">info@schipperkesvriendennederland.nl</a>
+                            </li>
+                            <li><a href="tel:+31123456789">+31&nbsp;12&nbsp;345&nbsp;6789</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="copyright">
+                    <p>&copy; 2025 Schipperkes Vrienden Nederland · <a href=""
+                            class="privacy-link">Privacyverklaring</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
