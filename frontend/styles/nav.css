@@ -8,6 +8,10 @@
     z-index: 1000;
 }
 
+i {
+    color: white !important;
+}
+
 .navbar-container {
     display: flex;
     justify-content: space-between;
