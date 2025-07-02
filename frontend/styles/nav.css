@@ -8,7 +8,11 @@
     z-index: 1000;
 }
 
-i {
+.fa-bars {
+    color: white !important;
+}
+
+.fa-times {
     color: white !important;
 }
 
