@@ -1,0 +1,12 @@
+services:
+  schipperkes:
+    # Asuming you already built the image
+    # Note: If you build the image comment out the godotenv if you are getting .env errors while running the container
+    image: schipperkes
+    ports:
+      - "8080:8080"
+    environment:
+      DEFAULT_EMAIL: test@gmail.com
+      DEFAULT_PASSWORD: admin
+      PORT: 8080
+    restart: unless-stopped

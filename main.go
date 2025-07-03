@@ -49,7 +49,7 @@ func main() {
 	}
 	gin.SetMode(gin.ReleaseMode)
 	database := &db.SchipperkesDB{}
-	database.Setup(filepath.Join("data" + "data.db"))
+	database.Setup(filepath.Join("data", "data.db"))
 	admin := database.GetAdminUser()
 	activityList := database.GetActivities()
 	if slices.Contains(os.Args, "debug") {
