@@ -49,7 +49,7 @@ func main() {
 	}
 	gin.SetMode(gin.ReleaseMode)
 	database := &db.SchipperkesDB{}
-	database.Setup("data.db")
+	database.Setup(filepath.Join("data" + "data.db"))
 	admin := database.GetAdminUser()
 	activityList := database.GetActivities()
 	if slices.Contains(os.Args, "debug") {
@@ -259,5 +259,5 @@ func main() {
 		database.RemoveActivityByUUID(uuid)
 		activityList = database.GetActivities()
 	})
-	router.Run(":8080")
+	router.Run(":" + os.Getenv("PORT"))
 }
