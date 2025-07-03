@@ -64,7 +64,7 @@ func main() {
 	router := gin.Default()
 	store := cookie.NewStore([]byte("secret"))
 
-	store.Options(sessions.Options{MaxAge: int(30 * time.Minute), Path: "/", HttpOnly: true, Secure: true})
+	store.Options(sessions.Options{Path: "/", HttpOnly: true, Secure: true})
 	router.Use(sessions.Sessions("admin-session", store))
 	// router.LoadHTMLGlob("./**/*.html")
 	tmpl, err := loadTemplates(".html")
