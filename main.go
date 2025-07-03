@@ -49,7 +49,12 @@ func main() {
 	}
 	gin.SetMode(gin.ReleaseMode)
 	database := &db.SchipperkesDB{}
-	database.Setup(filepath.Join("data", "data.db"))
+	databasePath := filepath.Join("data", "data.db")
+	err = os.MkdirAll(filepath.Dir(databasePath), 0755)
+	if err != nil {
+		log.Fatal("Error creating database directory: " + err.Error())
+	}
+	database.Setup(databasePath)
 	admin := database.GetAdminUser()
 	activityList := database.GetActivities()
 	if slices.Contains(os.Args, "debug") {
@@ -87,6 +92,30 @@ func main() {
 
 	router.GET("/activiteiten", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "activiteiten.html", gin.H{})
+	})
+
+	router.GET("/fokkers", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "fokkers.html", gin.H{})
+	})
+
+	router.GET("/showuitslagen", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "showuitslagen.html", gin.H{})
+	})
+
+	router.GET("/verzorging", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "verzorging.html", gin.H{})
+	})
+
+	router.GET("/zuster", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "zuster.html", gin.H{})
+	})
+
+	router.GET("/inschrijving", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "inschrijving.html", gin.H{})
+	})
+
+	router.GET("/pups", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "pups.html", gin.H{})
 	})
 
 	router.GET("/activiteiten/get/all", func(ctx *gin.Context) {
