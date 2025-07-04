@@ -1,0 +1,42 @@
+<tr style="display: flex; flex-direction: row">
+  <th>Naam</th>
+  <th>Achternaam</th>
+  <th>Email</th>
+  <th>Telefoon</th>
+  <th>Geboorte datum</th>
+  <th>Straat en nummer</th>
+  <th>Postcode</th>
+  <th>Plaats</th>
+  <th>ExtraInfo</th>
+  <th>Verwijderen</th>
+</tr>
+{{ range .signUpList}}
+<tr
+  hx-target="this"
+  hx-swap="outerHTML"
+  class="item"
+  style="display: flex; flex-direction: row"
+>
+  <td>{{ .FirstName }}</td>
+  <td>{{ .LastName }}</td>
+  <td>{{ .Email }}</td>
+  <td>{{ .Phone }}</td>
+  <td>{{ .Birthdate }}</td>
+  <td>{{ .StreetAndNumber }}</td>
+  <td>{{ .ZipCode }}</td>
+  <td>{{ .City }}</td>
+  <td>{{ .ExtraInfo }}</td>
+  <td>
+    <button
+      type="button"
+      hx-post="/admin/signup/api/remove"
+      hx-target="closest .item"
+      hx-swap="delete"
+      hx-confirm="Are you sure?"
+      hx-vals='{"UUID": "{{ .UUID }}"}'
+    >
+      Verwijder
+    </button>
+  </td>
+</tr>
+{{ end }}

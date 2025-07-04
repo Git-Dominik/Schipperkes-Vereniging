@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Git-Dominik/Schipperkes-Vereniging/auth"
 	"Git-Dominik/Schipperkes-Vereniging/db"
+	"Git-Dominik/Schipperkes-Vereniging/handlers"
 	"fmt"
 	"html/template"
 	"log"
@@ -60,7 +60,7 @@ func main() {
 	if slices.Contains(os.Args, "debug") {
 		gin.SetMode(gin.DebugMode)
 	}
-	authManager := auth.AuthManager{Admin: &admin, DB: database}
+	authManager := handlers.AuthManager{Admin: &admin, DB: database}
 	router := gin.Default()
 	store := cookie.NewStore([]byte("secret"))
 
@@ -188,6 +188,7 @@ func main() {
 	})
 
 	activityApi := router.Group("/admin/activities/api")
+	activityApi.Use(authManager.AuthMiddleware())
 
 	activityApi.GET("/get/all", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "activityListTemplateAdmin.html", gin.H{
@@ -211,6 +212,7 @@ func main() {
 		activity, err := database.GetActivityByUUID(uuid)
 		if err != nil {
 			ctx.String(http.StatusBadRequest, "Activity not found", gin.H{})
+			return
 		}
 		ctx.HTML(http.StatusOK, "activityEditTemplate.html", gin.H{"activity": activity})
 	})
@@ -248,7 +250,7 @@ func main() {
 		database.GormDB.Save(&activity)
 		// Uses list here but works in this case
 		activityList := []db.Activity{*activity}
-		ctx.HTML(http.StatusOK, "activityListTemplate.html", gin.H{"activityList": activityList})
+		ctx.HTML(http.StatusOK, "activityListTemplateAdmin.html", gin.H{"activityList": activityList})
 	})
 
 	activityApi.POST("/submit", func(ctx *gin.Context) {
@@ -283,10 +285,22 @@ func main() {
 			"activityList": activityList,
 		})
 	})
+
 	activityApi.POST("/remove", func(ctx *gin.Context) {
 		uuid := ctx.PostForm("UUID")
 		database.RemoveActivityByUUID(uuid)
 		activityList = database.GetActivities()
 	})
+
+	router.POST("/signup", handlers.ContactForm(database))
+
+	adminGroup.GET("/signups", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "adminSignUps.html", gin.H{})
+	})
+	signUpApi := router.Group("/admin/signup/api")
+	signUpApi.Use(authManager.AuthMiddleware())
+	signUpApi.GET("/get/all", handlers.GetAllSignUps(database))
+	signUpApi.POST("/remove", handlers.RemoveSignUp(database))
+
 	router.Run(":" + os.Getenv("PORT"))
 }

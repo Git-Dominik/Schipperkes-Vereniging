@@ -1,0 +1,74 @@
+<tr>
+  <td colspan="7">
+    <form
+      hx-put="/admin/activities/api/update/{{.activity.UUID}}"
+      hx-target="closest tr"
+      hx-trigger="submit"
+      hx-swap="outerHTML"
+    >
+      <table>
+        <tr>
+          <td>
+            <label>Titel</label>
+            <input
+              type="text"
+              name="titel"
+              value="{{ .activity.Title }}"
+              required
+            />
+          </td>
+          <td>
+            <label>Bericht</label>
+            <input
+              type="text"
+              name="bericht"
+              value="{{ .activity.Message }}"
+              required
+            />
+          </td>
+          <td>
+            <label>Locatie</label>
+            <input
+              type="text"
+              name="locatie"
+              value="{{ .activity.Location }}"
+              required
+            />
+          </td>
+          <td>
+            <label>Start Datum/tijd</label>
+            <input
+              type="datetime-local"
+              name="datumTijdStart"
+              value="{{ .activity.DateTimeStart }}"
+              required
+            />
+          </td>
+          <td>
+            <label>Eind Datum/tijd</label>
+            <input
+              type="datetime-local"
+              name="datumTijdEnd"
+              value="{{ .activity.DateTimeEnd }}"
+              required
+            />
+          </td>
+          <td>
+            <button type="submit" class="btn">Verander</button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn"
+              hx-get="/admin/activities/api/get/{{.activity.UUID}}"
+              hx-swap="outerHTML"
+              hx-target="closest tr"
+            >
+              Annuleren
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </td>
+</tr>

@@ -1,4 +1,4 @@
-package auth
+package handlers
 
 import (
 	"Git-Dominik/Schipperkes-Vereniging/db"
@@ -36,7 +36,7 @@ func (authManager *AuthManager) LoginHandler(ctx *gin.Context) {
 	admin := authManager.Admin
 	err := bcrypt.CompareHashAndPassword(admin.HashedPassword, []byte(password))
 	if err != nil || email != admin.Email {
-		ctx.HTML(http.StatusOK, "loginfailed.html", gin.H{})
+		ctx.HTML(http.StatusOK, "loginFailed.html", gin.H{})
 		return
 	}
 	sessionUuid := uuid.New()

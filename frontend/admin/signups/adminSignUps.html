@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="/scripts/htmx.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inschrijvingen</title>
+  <style>
+  #signups {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #signups td, #signups th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: 100%;
+  }
+
+  #signups tr:nth-child(even){background-color: #f2f2f2;}
+
+  #signups tr:hover {background-color: #ddd;}
+
+  #signups th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+    width: 100%;
+  }
+  </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/admin/activities">Activiteiten</a>
+      <a href="/admin/signups">Inschrijvingen</a>
+    </nav>
+    <div class="signups-container">
+      <table
+        id="signups"
+        hx-get="/admin/signup/api/get/all"
+        hx-trigger="load"
+        hx-swap="innerHTML"
+      ></table>
+  </body>
+</html>

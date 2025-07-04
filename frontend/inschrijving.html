@@ -13,6 +13,7 @@
     />
     <title>Schipperkes Vrienden Nederland</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png" />
+    <script src="/scripts/htmx.js"></script>
   </head>
 
   <body>
@@ -141,8 +142,10 @@
 
         <form
           class="membership-form"
-          method="POST"
-          action="https://www.formbackend.com/f/8995074caf47ea70"
+          hx-post="/signup"
+          hx-trigger="submit"
+          hx-target=".message"
+          hx-swap="innerHTML"
         >
           <div class="form-section">
             <h3 class="section-title">Persoonlijke Gegevens</h3>
@@ -281,6 +284,7 @@
             </button>
           </div>
         </form>
+        <div class="message"></div>
 
         <div class="form-note">
           <h4>Wat gebeurt er na uw aanmelding?</h4>

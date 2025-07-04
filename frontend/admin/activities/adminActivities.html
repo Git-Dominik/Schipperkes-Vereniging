@@ -6,22 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Activiteiten</title>
     <style>
-      .form-item {
-        display: flex;
-        flex-direction: column;
+      #activities {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
       }
-      * {
-        padding: 15px;
+
+      #activities td,
+      #activities th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #activities tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #activities tr:hover {
+        background-color: #ddd;
+      }
+
+      #activities th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04aa6d;
+        color: white;
       }
     </style>
   </head>
   <body>
+    <nav>
+      <a href="/admin/activities">Activiteiten</a>
+      <a href="/admin/signups">Inschrijvingen</a>
+    </nav>
     <div class="activities-container">
       <div class="activities-add">
         <form
           hx-post="/admin/activities/api/submit"
           hx-trigger="submit"
-          hx-target=".activity-list"
+          hx-target=".activities"
           hx-swap="innerHTML"
         >
           <div class="form-item">
@@ -54,12 +78,25 @@
           </div>
         </form>
       </div>
-      <div
-        class="activity-list"
-        hx-get="/admin/activities/api/get/all"
-        hx-trigger="load"
-        hx-swap="innerHTML"
-      ></div>
+      <table id="activities">
+        <thead>
+          <tr>
+            <th>Titel</th>
+            <th>Bericht</th>
+            <th>Locatie</th>
+            <th>Datum/tijd start</th>
+            <th>Datum/tijd eind</th>
+            <th>Verwijder knop</th>
+            <th>Edit knop</th>
+          </tr>
+        </thead>
+        <tbody
+          class="activities"
+          hx-get="/admin/activities/api/get/all"
+          hx-trigger="load"
+          hx-swap="innerHTML"
+        ></tbody>
+      </table>
     </div>
   </body>
 </html>
