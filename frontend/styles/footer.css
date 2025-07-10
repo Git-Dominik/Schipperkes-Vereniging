@@ -1,14 +1,10 @@
+
 .site-footer {
   background-color: var(--second-primary);
   padding: 40px 0 20px;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  margin-top: auto;
-  flex-shrink: 0;
+  min-height: 120px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .footer-container {
