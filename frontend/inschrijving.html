@@ -38,6 +38,7 @@
         <div class="membership-info">
           <h3>Lidmaatschap</h3>
           <div class="price">€30 per jaar</div>
+          <div class="price" style="font-size: 15px;">€15 voor gezinsleden</div>
           <div class="benefits">
             <div class="benefit-item">
               <i class="fas fa-check"></i>
@@ -159,8 +160,8 @@
               />
               <label for="privacy"
                 >Ik ga akkoord met het
-                <a href="" style="color: var(--primary-color)"
-                  >privacybeleid</a
+                <a href="files/PRIVACY_VERKLARING.pdf" style="color: var(--primary-color)"
+                  >Privacyverklaring</a
                 >
                 <span class="required">*</span></label
               >
@@ -191,19 +192,22 @@
     </main>
 
     <div id="footer"></div>
-    <script src="scripts/nav.js"></script>
-      <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-      });
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar').innerHTML = data;
 
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
-  </script>
+      const script = document.createElement('script');
+      script.src = 'scripts/nav.js';
+      document.body.appendChild(script);
+    });
+
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
   </body>
 </html>

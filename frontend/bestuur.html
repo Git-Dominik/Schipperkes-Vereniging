@@ -72,14 +72,12 @@
           </div>
 
           <div class="bestuur-card">
-            <div class="bestuur-avatar">TG</div>
-            <div class="bestuur-functie">Evenementen</div>
-            <div class="bestuur-naam">Thilde Guichelaar</div>
+            <div class="bestuur-avatar">JB</div>
+            <div class="bestuur-functie">2e Penningmeester</div>
+            <div class="bestuur-naam">Joep de Boer</div>
             <div class="bestuur-beschrijving">
-              Thilde organiseert als evenementencoördinator alle activiteiten en
-              bijeenkomsten van onze club. Van shows tot gezellige
-              bijeenkomsten, zij zorgt ervoor dat er altijd iets leuks te
-              beleven valt voor onze leden.
+              Joep ondersteunt als 2e penningmeester het financiële beheer van de club. 
+              Samen met de penningmeester zorgt hij voor een zorgvuldige en transparante boekhouding.
             </div>
           </div>
         </div>
@@ -88,20 +86,22 @@
 
     <div id="footer"></div>
 
-    <script src="scripts/nav.js"></script>
-  <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-      });
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar').innerHTML = data;
 
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
-  </script>
+      const script = document.createElement('script');
+      script.src = 'scripts/nav.js';
+      document.body.appendChild(script);
+    });
+
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
   </body>
 </html>
-

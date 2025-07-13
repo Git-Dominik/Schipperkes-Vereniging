@@ -70,22 +70,29 @@
           </div>
 
           <div class="copyright">
-            <p>&copy; 2025 Schipperkes Vrienden Nederland · <a href="" class="privacy-link">Privacyverklaring</a></p>
+            <p>&copy; 2025 Schipperkes Vrienden Nederland · <a href="files/PRIVACY_VERKLARING.pdf" class="privacy-link">Privacyverklaring</a></p>
           </div>
         </div>
       </div>
     </footer>
 
-  <script src="scripts/nav.js"></script>
-  <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-      });
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar').innerHTML = data;
 
+      const script = document.createElement('script');
+      script.src = 'scripts/nav.js';
+      document.body.appendChild(script);
+    });
 
-  </script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
 </body>
 
 </html>

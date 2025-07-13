@@ -25,7 +25,7 @@
   </head>
 
   <body>
-        <div id="navbar"></div>
+    <div id="navbar"></div>
 
     <div class="hero-page-container">
       <div class="hero-page-content">
@@ -217,10 +217,6 @@
                   verenigingsactiviteiten
                 </li>
                 <li>
-                  <i class="fas fa-check-circle"></i> Kwartaalmagazine met
-                  informatie en verhalen
-                </li>
-                <li>
                   <i class="fas fa-check-circle"></i> Advies over gezondheid en
                   verzorging
                 </li>
@@ -239,7 +235,6 @@
               </ul>
               <div class="membership-cta">
                 <a href="inschijving.html" class="btn-primary">Word nu lid</a>
-                <span class="membership-price">€25 per jaar</span>
               </div>
             </div>
             <div class="membership-image">
@@ -330,19 +325,27 @@
     </div>
 
     <div id="footer"></div>
-    <script src="scripts/nav.js"></script>
-      <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-      });
+<script>
+  // Navbar inladen
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar').innerHTML = data;
 
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
-  </script>
+      // NAVBAR IS NU IN DOM → nav.js mag geladen worden
+      const script = document.createElement('script');
+      script.src = 'scripts/nav.js';
+      document.body.appendChild(script);
+    });
+
+  // Footer inladen (zoals eerder)
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
+
+
   </body>
 </html>

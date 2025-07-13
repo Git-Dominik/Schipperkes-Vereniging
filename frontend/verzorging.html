@@ -264,20 +264,22 @@
       </div>
     </main>
 
-    <div id="footer"></div>
-    <script src="scripts/nav.js"></script>
-      <script>
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar').innerHTML = data;
-      });
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar').innerHTML = data;
 
-    fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
-  </script>
+      const script = document.createElement('script');
+      script.src = 'scripts/nav.js';
+      document.body.appendChild(script);
+    });
+
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
   </body>
 </html>

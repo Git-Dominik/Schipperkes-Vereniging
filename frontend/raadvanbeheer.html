@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schipperkes Vrienden Nederland</title>
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+  <link rel="stylesheet" href="styles/history.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/nav.css">
+  <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/raadvanbeheer.css">
+  <link rel="stylesheet" href="styles/shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+
+
+  <section class="hero-section">
+    <div class="hero-image"></div>
+    <div class="hero-content">
+      <h1>raadvanbeheer</h1>
+      <p>Lorem, ipsum dolor sit amet consectetur</p>
+    </div>
+  </section>
+
+
+<div class="page-logo">
+  <img src="images/raadvanbeheer.jpg" alt="Schipperkes Vrienden Nederland Logo">
+</div>
+
+<main class="main-content styled-content">
+  <h2>Het Schipperke</h2>
+  <p>Het Schipperke is een hond die van oorsprong uit België komt. Zijn naam laat zich vertalen naar 'kleine herder' of 'kleine kapitein' en deze naam spreekt boekdelen over de rol van het Schipperke in het verleden én zijn karakter. Laat je niet misleiden door zijn kleine formaat: het Schipperke is een toegewijde, slimme en onbevreesde hond die absoluut zijn mannetje staat.</p>
+
+  <h3>Uiterlijk</h3>
+  <p>Het Schipperke is familie van de herdershond, al lijkt hij uiterlijk misschien niet direct op een herdershond, maar eerder op een Spits. Zijn uiterlijk doet enigszins vosachtig aan door zijn wigvormige kop en duidelijke welvingen boven zijn ogen. Zijn lichaam is klein, maar atletisch. Hij is vrij vierkant gebouwd, wat extra wordt benadrukt door zijn dichte kraag om zijn nek. De borst is vrij breed en de poten zijn goed in verhouding met de rest van het lichaam.</p>
+
+  <h3>Grootte</h3>
+  <p>Het Schipperke is tussen de 25 en 33 centimeter hoog. Vrouwtjeshonden zijn meestal kleiner van stuk dan mannetjeshonden. Het gewicht ligt tussen de 3 en de 9 kilo.</p>
+
+  <h3>Vacht</h3>
+  <p>Het Schipperke heeft een dubbele vacht. De ondervacht is dicht en meestal grijs van kleur. De zwarte bovenvacht is kort, glad en hard van structuur. Rond de nek kan het Schipperke een kraag van haren hebben. Zijn staart draagt hij meestal hoog op de rug.</p>
+
+  <h3>Karakter</h3>
+  <p>Zoals de meeste kleine hondenrassen is ook het Schipperke een pittige hond. Hij is vrij eigenzinnig, speels en hij laat graag van zich horen. Hij is ook charismatisch, gezellig en vermakelijk en dat maakt hem onder andere zo geliefd als gezelschapshond.</p>
+  <p>Hij is erg intelligent, loyaal naar zijn baasje toe en kan goed met mensen overweg. Hij kan wat argwanend zijn naar vreemden toe. Dat kwam vroeger goed van pas als waakhond, maar tegenwoordig is het iets waar tijdens de socialisatie aandacht aan moet worden besteed.</p>
+
+  <h3>Opvoeding en socialisatie</h3>
+  <p>Het Schipperke is vanwege zijn intelligentie en zijn loyaliteit naar zijn baasje toe vrij goed te trainen. In principe pikt hij nieuwe informatie snel op en zal hij zich nieuwe vaardigheden snel eigen maken. Hij kan echter wel eigenwijs zijn, hij heeft een sterke eigen wil en zijn speelsheid is ook een uitdaging. Als baasje zul je dus een flinke dosis doorzettingsvermogen en geduld moeten hebben tijdens de opvoeding.</p>
+
+  <p>Het is zeker aan te raden om een goede puppycursus te volgen. Dit is niet alleen goed voor jullie onderlinge verstandhouding, maar het is ook een bron van informatie en vaardigheden voor de training van jouw hond.</p>
+
+  <p>In bijna iedere woonplaats worden hondentrainingen gegeven. Kijk bijvoorbeeld op deze website:<br>
+    <a href="https://www.houdenvanhonden.nl/kynologenclubs" target="_blank">www.houdenvanhonden.nl/kynologenclubs</a><br>
+    Hier vind je de bij de Raad van Beheer aangesloten kynologenclubs (KC) / hondenscholen, per provincie.
+  </p>
+</main>
+
+
+
+</div>
+    </section>
+
+
+
+
+
+
+
+    <div id="footer"></div>
+
+
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar').innerHTML = data;
+
+      const script = document.createElement('script');
+      script.src = 'scripts/nav.js';
+      document.body.appendChild(script);
+    });
+
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer').innerHTML = data;
+    });
+</script>
+</body>
+
+</html>

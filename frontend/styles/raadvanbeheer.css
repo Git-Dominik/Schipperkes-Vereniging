@@ -1,0 +1,49 @@
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-logo {
+  text-align: center;
+  margin: 30px 0;
+}
+.page-logo img {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.styled-content {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #333;
+  padding-bottom: 40px;
+}
+
+.styled-content h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3rem;
+}
+
+.styled-content h3 {
+  font-size: 1.4rem;
+  color: #444;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.styled-content a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.styled-content a:hover {
+  text-decoration: underline;
+}
